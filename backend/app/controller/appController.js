@@ -19,7 +19,7 @@ exports.create_a_post = function(req, res) {
   var new_post = new Post(req.body);
 
   //handles null error 
-   if(!new_post.title || !new_post.body){
+   if(!new_post.title || !new_post.body || !new_post.author || !new_post.date){
 
         res.status(400).send({ error:true, message: 'Please provide title/body' });
 

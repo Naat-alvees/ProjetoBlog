@@ -2,14 +2,14 @@
 var sql = require('./db.js');
 
 //Task object constructor
-var Post = function(post){
-    this.title = post.title;
-    this.body = post.body;
-    this.author = post.author;
-    this.date = post.date;
+var Comment = function(comment){
+    this.title = comment.title;
+    this.body = comment.body;
+    this.email = comment.email;
+    this.post_id = comment.post_id;
 };
-Post.createPost = function (newPost, result) {    
-        sql.query("INSERT INTO post set ?", newPost, function (err, res) {
+Comment.createComment = function (newComment, result) {    
+        sql.query("INSERT INTO comment set ?", newComment, function (err, res) {
                 
                 if(err) {
                     console.log("error: ", err);
@@ -21,8 +21,8 @@ Post.createPost = function (newPost, result) {
                 }
             });           
 };
-Post.getPostById = function (postId, result) {
-        sql.query("Select title, body from post where id = ? ", postId, function (err, res) {             
+Comment.getCommentById = function (commentId, result) {
+        sql.query("Select title, body, email from comment where id = ? ", commentId, function (err, res) {             
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);
@@ -33,22 +33,22 @@ Post.getPostById = function (postId, result) {
                 }
             });   
 };
-Post.getAllPost = function (result) {
-        sql.query("Select * from post", function (err, res) {
+Comment.getAllComment = function (result) {
+        sql.query("Select * from comment", function (err, res) {
 
                 if(err) {
                     console.log("error: ", err);
                     result(null, err);
                 }
                 else{
-                  console.log('post : ', res);  
+                  console.log('comment : ', res);  
 
                  result(null, res);
                 }
             });   
 };
-Post.updateById = function(id, post, result){
-  sql.query("UPDATE post SET title = ?, body = ?, author = ?, date = ? WHERE id = ?", [post.title, post.body,post.author, post.date, id], function (err, res) {
+Comment.updateById = function(id, comment, result){
+  sql.query("UPDATE comment SET body = ? WHERE id = ?", [ comment.body, id], function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);
@@ -58,8 +58,8 @@ Post.updateById = function(id, post, result){
                 }
             }); 
 };
-Post.remove = function(id, result){
-     sql.query("DELETE FROM post WHERE id = ?", [id], function (err, res) {
+Comment.remove = function(id, result){
+     sql.query("DELETE FROM comment WHERE id = ?", [id], function (err, res) {
 
                 if(err) {
                     console.log("error: ", err);
@@ -72,4 +72,4 @@ Post.remove = function(id, result){
             }); 
 };
 
-module.exports= Post;
+module.exports= Comment;
