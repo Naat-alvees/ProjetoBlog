@@ -6,6 +6,7 @@
       </a>
     
   </div>
+
   <div class="collapse " id="collapseCardExample">
          <div class="card-body">
             <form class="form">
@@ -38,16 +39,16 @@
   
 </div>
 
-<div class="card mx-auto mb-3 mt-4 shadow-lg">
-    <img class="card-img-top" src="../../assets/img1.jpg" height="400px" alt="Imagem de capa do card">    
+<div class="card mx-auto mb-3 mt-4 shadow-lg" *ngFor= "let post of posts">
+    <img class="card-img-top" [src]="post.image.url" height="400px" alt="Imagem de capa do card">    
     <div class="card-body">
-      <h3 class="card-title mb-0">Título do card</h3>
-      <p> Por Maria candida</p>
-      <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
-      <a href="">Ver mais >></a> <br><br>
+      <h3 class="card-title mb-0">{{post.title}}</h3>
+      <p> Por {{ post.author }}</p>
+      <p class="card-text"> {{ post.body }} </p>
+      <a routerLink = "/post">Ver mais >></a> <br><br>
 
-      <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-calendario.png"> 3 comentários</small></p>
-      <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-comentario.png"> 3 comentários</small></p>
+      <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-calendario.png"> {{post.date}}</small></p>
+      <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-comentario.png"> {{post.nComments}}</small></p>
               
     </div>
 </div>
