@@ -24,6 +24,7 @@ import { PostComponent } from './post/post.component';
   imports: [
     BrowserModule,
     AppRoutingModule
+    // HttpClient
   ],
   providers: [],
   bootstrap: [AppComponent]

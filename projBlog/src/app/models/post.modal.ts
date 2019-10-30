@@ -5,5 +5,4 @@ export class Post{
     public author: string;
     public date: string;
     public nComments: number;
-    public image: object;
 }

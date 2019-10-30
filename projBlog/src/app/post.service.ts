@@ -8,11 +8,11 @@ import { Injectable } from '@angular/core';
 //     headers: new HttpHeaders({'Content-Type': 'application/json'})
 //   };
 
-// const  apiUrl  = 'http://localhost:5000/api/post';
+// const  apiUrl  = 'http://localhost:3000/post';
 
-// @Injectable({
-//     providedIn: 'root'
-// })
+@Injectable({
+    providedIn: 'root'
+})
 
 @Injectable()
 export class PostService{
@@ -28,7 +28,6 @@ export class PostService{
             author: "Maria Aparecida",
             date: "10/06/1997",
             nComments: 10,
-            image: {url: "../../assets/img1.jpg"}
         },
         {
             id: 2,
@@ -37,13 +36,14 @@ export class PostService{
             author: "João carlos",
             date: "23/10/2019",
             nComments: 10,
-            image: {url: "../../assets/img2.jpg"}
         }
     ]
 
     public getPosts(): Array <Post>{
         return this.posts;
     }
+
+
     // public getPosts (): Observable<Post[]> {
     //     return this.http.get<Post[]>(apiUrl)
     //       .pipe(
