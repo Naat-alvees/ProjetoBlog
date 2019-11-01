@@ -15,15 +15,15 @@ export class HomeComponent implements OnInit {
   constructor(private postService : PostService) { }
 
   ngOnInit() {
-    this.posts = this.postService.getPosts();
+    // this.posts = this.postService.getPosts();
 
-    // this.postService.getPosts().subscribe(res => {
-    //   this.posts = res;
-    //   this.posts = this.posts.reverse();
-    //   console.log(this.posts);
-    // }, err => {
-    //   console.log(err);
-    // });
+    this.postService.getPosts().subscribe(res => {
+      this.posts = res;
+      this.posts = this.posts.reverse();
+      console.log(this.posts);
+    }, err => {
+      console.log(err);
+    });
     
   }
 
