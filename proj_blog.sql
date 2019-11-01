@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `proj_blog` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `proj_blog`;
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: proj_blog
@@ -84,9 +82,9 @@ CREATE TABLE `post` (
   `title` varchar(50) NOT NULL,
   `body` text NOT NULL,
   `author` varchar(45) NOT NULL,
-  `date` datetime NOT NULL,
+  `datePost` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +93,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'Teste1','Aqui é um teste','','0000-00-00 00:00:00'),(2,'TESTE2','teste 2 aqui','','0000-00-00 00:00:00');
+INSERT INTO `post` VALUES (1,'Teste1','Aqui é um teste','','2019-11-01 12:53:24'),(2,'TESTE2','teste 2 aqui','','2019-11-01 12:53:24'),(3,'Fulano','fulano diz ser boa pessoa','Adalberto','2019-11-01 12:54:53');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -108,4 +106,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-29 10:57:56
+-- Dump completed on 2019-11-01  9:59:07
