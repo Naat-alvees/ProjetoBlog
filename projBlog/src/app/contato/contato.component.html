@@ -2,26 +2,53 @@
     <div class="container mt-4 shadow-lg" style="background: #FFFFFF; border-radius: 1em">
         <div class="row">
             <div class="col-8 offset-2 ">
-                <form class="text-center  p-3" action="#!">
-    
-                    <p class="h3 mb-4">Contato</p>
-                
-                    <!-- Nome -->
-                    <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Nome">
-                
-                    <!-- Email -->
-                    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
-                                        
-                    <!-- Mensagem -->
-                    <div class="form-group">
-                        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Mensagem"></textarea>
-                    </div>
-                
-                    <!-- Botões -->
-                    <button class="btn btn-info mb-4 mr-4" type="reset">Limpar</button>
-                    <button class="btn btn-info mb-4" type="submit">Enviar</button>
-                </form>
+                <p class="h3 mb-4 text-center  p-3">Contato</p>  
+                <div class="" *ngIf="idContato === undefined">
+
+                        
+                    <form #formularioContato="ngForm" (ngSubmit) = "addContato(formularioContato)" novalidate class="text-center  p-3">
+                        
+                        <!-- Nome -->
+                        <div class="form-group">
+                            <input type="text" name = "nome" class="form-control "  placeholder="Nome" #nomeContato = "ngModel" ngModel required minlength="2">
+                            <small *ngIf = "nomeContato.valid && nomeContato.touched" class="form-text text-succes">Ok</small>
+                            <small *ngIf = "!nomeContato.valid && nomeContato.touched" class="form-text text-danger ">Nome inválido</small>
+
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control " placeholder="E-mail" #emailContato="ngModel" ngModel required minlength="7" >
+                            <small *ngIf = "emailContato.valid && emailContato.touched" class="form-text text-succes">Ok</small>
+                            <small *ngIf = "!emailContato.valid && emailContato.touched" class="form-text text-danger">Email inválido</small>
+
+                        </div>
+
+                        <!-- Mensagem -->
+
+                        <div class="form-group">
+                            <textarea class="form-control rounded-0" name="mensagem"  rows="3" #mensagemContato="ngModel" placeholder="Mensagem" ngModel required ></textarea>
+                            <small *ngIf = "mensagemContato.valid && mensagemContato.touched" class="form-text text-succes">Ok</small>
+                            <small *ngIf = "!mensagemContato.valid && mensagemContato.touched" class="form-text text-danger">Mensagem inválido</small>
+
+                        </div>
+                    
+                        <!-- Botões -->´
+                        <button class="btn btn-info mb-4 mr-4" type="submit" >Enviar</button>
+                        <button class="btn btn-info mb-4 " type="reset">Limpar</button>
+                        
+                    </form>
+                 </div>
+                 <div class="" *ngIf =" idContato !== undefined">
+                     <div class="container text-center">
+                        
+                        <p>Mensagem enviada com sucesso!</p>
+                     </div>
+
+                 </div>
         </div>
     </div>
+
+
     
 </div>
