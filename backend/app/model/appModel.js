@@ -6,7 +6,6 @@ var Post = function(post){
     this.title = post.title;
     this.body = post.body;
     this.author = post.author;
-    this.date = post.date;
 };
 Post.createPost = function (newPost, result) {    
         sql.query("INSERT INTO post set ?", newPost, function (err, res) {

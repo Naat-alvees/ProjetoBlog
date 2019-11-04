@@ -17,11 +17,11 @@ exports.list_all_post = function(req, res) {
 
 exports.create_a_post = function(req, res) {
   var new_post = new Post(req.body);
-
+  console.log(new_post);
   //handles null error 
-   if(!new_post.title || !new_post.body || !new_post.author || !new_post.date){
+   if(!new_post.title || !new_post.body || !new_post.author){
 
-        res.status(400).send({ error:true, message: 'Please provide title/body' });
+        res.status(400).send({ error:true, message: 'Esta caindo aqui' });
 
     }else{
         Post.createPost(new_post, function(err, post) {
