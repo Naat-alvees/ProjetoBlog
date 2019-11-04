@@ -21,7 +21,7 @@ Post.createPost = function (newPost, result) {
             });           
 };
 Post.getPostById = function (postId, result) {
-        sql.query("Select title, body from post where id = ? ", postId, function (err, res) {             
+        sql.query("Select * from post where id = ? ", postId, function (err, res) {             
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);

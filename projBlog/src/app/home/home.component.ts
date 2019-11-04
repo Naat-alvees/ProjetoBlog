@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   public posts : Post[]
 
-  constructor(private postService : PostService, private router: Router) { 
+  constructor(private postService : PostService) { 
   }
 
   ngOnInit() {
@@ -34,7 +33,10 @@ export class HomeComponent implements OnInit {
   public addPost(formulario: NgForm): void {
     
     if(formulario.valid){
-      let post: Post = new Post(formulario.value.title, formulario.value.bodyPost, formulario.value.author);
+      let post: Post = new Post();
+      post.author = formulario.value.author;
+      post.body = formulario.value.bodyPost;
+      post.title = formulario.value.title;
       this.postService.addPost(post).subscribe( res => {
         formulario.reset();
         this.ngOnInit();

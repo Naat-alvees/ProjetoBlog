@@ -1,14 +1,16 @@
-<div class="container mt-4 shadow-lg" style="background: #FFFFFF; border-radius: 1em">
-    <h3>Post do João</h3>
-    <h5>Por João</h5>
+<div class="container mt-4 shadow-lg p-4" style="background: #FFFFFF; border-radius: 1em">
+    <h3> {{post.title}} </h3>
+    <p>Por {{post.author}}</p>
     <hr>
-    <p>Postado em 01 de janeiro de 2019</p>
+    <p>Postado em {{post.datePost | date: 'dd/MM/yyyy HH:mm'}}</p>
     <hr>
-    <img src="../../assets/img1.jpg" height="400px" width="1100px" alt="">
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vel facilisis volutpat est velit egestas dui id ornare. Lacus suspendisse faucibus interdum posuere lorem ipsum. Augue ut lectus arcu bibendum at varius vel. Malesuada fames ac turpis egestas maecenas pharetra. Eget arcu dictum varius duis at consectetur lorem donec massa. Sit amet massa vitae tortor condimentum. Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. At ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Velit egestas dui id ornare arcu odio ut sem nulla. Nibh praesent tristique magna sit amet purus. Sodales neque sodales ut etiam. Nulla facilisi cras fermentum odio eu. Quisque egestas diam in arcu cursus euismod quis.
-        Ultrices sagittis orci a scelerisque purus semper eget. Mi ipsum faucibus vitae aliquet nec ullamcorper sit. Cursus sit amet dictum sit amet justo donec enim diam. Et netus et malesuada fames ac turpis egestas. Ut porttitor leo a diam sollicitudin tempor id. Dignissim diam quis enim lobortis scelerisque. Fusce id velit ut tortor pretium viverra suspendisse potenti. Tellus elementum sagittis vitae et leo duis ut. Dignissim suspendisse in est ante in nibh mauris. Netus et malesuada fames ac turpis. Mi eget mauris pharetra et.
-    </p>
+    <img src="https://picsum.photos/1100/400?random={{post.id}}" height="400px" width="100%" >
+    <div class="text-justify mt-3 mb-3">
+        <p>
+            {{ post.body }}
+        </p>
+    </div>
+    
     <hr>
 
     <div class="card mb-4">
@@ -16,17 +18,28 @@
         <div class="card-body">
             <form class="form">
                     <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Texto da publicação </label>
-                            <textarea class="form-control inputs shadow-sm" id="exampleFormControlTextarea1" rows="3" placeholder="O que você está pensando?"></textarea>
+                            <label for="exampleFormControlTextarea1">Comentário </label>
+                            <textarea class="form-control inputs shadow-sm" id="exampleFormControlTextarea1" rows="3" placeholder=""></textarea>
                         </div>
                 <div class="form-group ">
-                  <label for="exampleFormControlTextarea1">Nome do autor </label>
+                  <label for="exampleFormControlTextarea1">Nome </label>
                   <input type="text" class="form-control inputs shadow-sm" id="formGroupExampleInput" placeholder="">
+                  
+                </div>
+                <div class="form-group ">
+                    <label for="exampleFormControlTextarea1">Email </label>
+                    <input type="text" class="form-control inputs shadow-sm" id="formGroupExampleInput" placeholder="">
+                </div>
+                <div>
+                    <button class="btn btn-primary shadow-sm" type="submit"  value="Submit">ENVIAR COMENTÁRIO</button>
                 </div>
                 
             </form>
         </div>
-      </div>
+    </div>
 
-aaaa
+    <div>
+        <p>Ainda não há comentários neste post</p>
+    </div>
+
 </div>
