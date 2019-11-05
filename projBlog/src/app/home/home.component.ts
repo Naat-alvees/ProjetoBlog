@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +16,7 @@ export class HomeComponent implements OnInit {
   public paginaAtual = 1;
 
 
-  constructor(private postService : PostService, private router: Router) { 
+  constructor(private postService : PostService) { 
   }
 
   
@@ -37,16 +36,17 @@ export class HomeComponent implements OnInit {
 
 
   public addPost(formulario: NgForm): void {
-    
-    if(formulario.valid){
-      let post: Post = new Post(formulario.value.title, formulario.value.bodyPost, formulario.value.author);
-      this.postService.addPost(post).subscribe( res => {
-        formulario.reset();
-        this.ngOnInit();
-      }, (err) => {
-        console.log(err);
-      });
-    } 
+    let post: Post = new Post();
+    post.author = formulario.value.author;
+    post.body = formulario.value.bodyPost;
+    post.title = formulario.value.title;
+    this.postService.addPost(post).subscribe( res => {
+      formulario.reset();
+      this.ngOnInit();
+    }, (err) => {
+      console.log(err);
+    });
+     
   }
 
 }
