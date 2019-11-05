@@ -16,30 +16,38 @@
     <div class="card mb-4">
         <h5 class="card-header">Deixe seu comentário</h5>
         <div class="card-body">
-            <form class="form">
-                    <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Comentário </label>
-                            <textarea class="form-control inputs shadow-sm" id="exampleFormControlTextarea1" rows="3" placeholder=""></textarea>
-                        </div>
+            <form class="form" #formularioComentario="ngForm" (ngSubmit) = "addComentario(formularioComentario)" novalidate>
                 <div class="form-group ">
-                  <label for="exampleFormControlTextarea1">Nome </label>
-                  <input type="text" class="form-control inputs shadow-sm" id="formGroupExampleInput" placeholder="">
+                    <label for="labelTitulo">Título </label>
+                    <input type="text" class="form-control inputs shadow-sm" name="title"required ngModel placeholder="Dê um título ao seu comentário"> 
+                </div>
+                <div class="form-group">
+                    <label for="labelComentario">Comentário </label>
+                    <textarea class="form-control inputs shadow-sm" name="body" required ngModel rows="3" placeholder="Escreva um comentário bem legal :)"></textarea>
+                </div>
+                <div class="form-group ">
+                  <label for="labelNome">Nome </label>
+                  <input type="text" class="form-control inputs shadow-sm" name="author"required ngModel placeholder="Escreva seu nome aqui">
                   
                 </div>
                 <div class="form-group ">
-                    <label for="exampleFormControlTextarea1">Email </label>
-                    <input type="text" class="form-control inputs shadow-sm" id="formGroupExampleInput" placeholder="">
+                    <label for="labelEmail">Email </label>
+                    <input type="text" class="form-control inputs shadow-sm" name="email" required ngModel placeholder="Fica tranquilo, não divulgaremos seu email">
                 </div>
                 <div>
-                    <button class="btn btn-primary shadow-sm" type="submit"  value="Submit">ENVIAR COMENTÁRIO</button>
+                    <button class="btn btn-primary shadow-sm" type="submit" [disabled] = "formularioComentario.invalid" value="Submit">ENVIAR COMENTÁRIO</button>
                 </div>
                 
             </form>
         </div>
     </div>
 
-    <div>
+    <div *ngIf="comments.length === 0">
         <p>Ainda não há comentários neste post</p>
+    </div>
+
+    <div *ngIf="comments.length !== 0">
+        
     </div>
 
 </div>

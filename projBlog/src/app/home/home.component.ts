@@ -31,19 +31,17 @@ export class HomeComponent implements OnInit {
 
 
   public addPost(formulario: NgForm): void {
-    
-    if(formulario.valid){
-      let post: Post = new Post();
-      post.author = formulario.value.author;
-      post.body = formulario.value.bodyPost;
-      post.title = formulario.value.title;
-      this.postService.addPost(post).subscribe( res => {
-        formulario.reset();
-        this.ngOnInit();
-      }, (err) => {
-        console.log(err);
-      });
-    } 
+    let post: Post = new Post();
+    post.author = formulario.value.author;
+    post.body = formulario.value.bodyPost;
+    post.title = formulario.value.title;
+    this.postService.addPost(post).subscribe( res => {
+      formulario.reset();
+      this.ngOnInit();
+    }, (err) => {
+      console.log(err);
+    });
+     
   }
 
 }

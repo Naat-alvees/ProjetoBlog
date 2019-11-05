@@ -19,8 +19,7 @@ exports.create_a_comment = function(req, res) {
   var new_comment = new Comment(req.body);
 
   //handles null error 
-   if(!new_comment.title || !new_comment.body || !new_comment.email || !new_comment.post_id){
-
+   if(!new_comment.title || !new_comment.body || !new_comment.email || !new_comment.post_id || !new_comment.author){
         res.status(400).send({ error:true, message: 'Please provide title/body/email/post_id' });
 
     }else{

@@ -6,6 +6,7 @@ var Comment = function(comment){
     this.title = comment.title;
     this.body = comment.body;
     this.email = comment.email;
+    this.author = comment.author;
     this.post_id = comment.post_id;
 };
 Comment.createComment = function (newComment, result) {    
