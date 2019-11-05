@@ -1,3 +1,58 @@
+span {
+    display: inline-block;
+    width: 50%;
+    
+}
+
+.comments-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.be-img-comment {
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.be-ava-comment {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.be-comment-content {
+    margin-left: 80px;
+    margin-bottom: 50px;
+}
+
+.be-comment-content span {
+    margin-bottom: 15px;
+}
+
+.be-comment-name {
+    font-size: 17px;
+    font-family: 'Conv_helveticaneuecyr-bold';
+}
+
+.be-comment-actions {
+    text-align: right;
+}
+
+.be-comment-actions img{
+    margin-left: 10px;
+}
+
+.be-comment-text {
+    width: 95%;
+    font-size: 13px;
+    line-height: 18px;
+    display: block;
+    background: #f6f6f7;
+    border: 1px solid #edeff2;
+    padding: 15px 20px 20px 20px;
+}
 
 /* .card{
     border-radius: 0.7rem;

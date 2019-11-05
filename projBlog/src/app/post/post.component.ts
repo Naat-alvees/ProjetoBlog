@@ -13,14 +13,16 @@ import { CommentService } from '../comment.service';
 })
 export class PostComponent implements OnInit {
 
-  public id_post:number;
+  public id_post : number;
   public post : Post;
   public comments: Comment[];
+  public icon_aleatorio: number = 5;
 
   constructor(private route: ActivatedRoute, private postService : PostService, private commentService: CommentService) { }
 
   ngOnInit() {
     this.id_post = this.route.snapshot.params['id'];
+    
 
     // Le o post
     this.postService.getPost(this.id_post).subscribe(res => {
@@ -34,7 +36,6 @@ export class PostComponent implements OnInit {
     this.commentService.getComments().subscribe(res => {
       console.log(res);
       this.comments = res;
-      this.comments = this.comments.reverse();
     }, err => {
       console.log(err);
     });
@@ -53,6 +54,13 @@ export class PostComponent implements OnInit {
      
   }
 
+  public getNumeroaleatorio(){
+    let min = 1;
+    let max = 6;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
 
 }
