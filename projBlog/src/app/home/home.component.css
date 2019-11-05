@@ -32,7 +32,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
 }
-
+.paginacao{
+    padding-top: 15px;
+}
 button:hover{
 
     background-color: #ff9ff3;

@@ -4,6 +4,7 @@ import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,9 +14,13 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   public posts : Post[]
+  public paginaAtual = 1;
+
 
   constructor(private postService : PostService, private router: Router) { 
   }
+
+  
 
   ngOnInit() {
     // this.posts = this.postService.getPosts();

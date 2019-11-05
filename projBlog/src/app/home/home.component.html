@@ -31,19 +31,25 @@
             </form>
         </div> 
   </div>
-  
 </div>
-
-<div class="card mx-auto mb-3 mt-4 shadow-lg" *ngFor= "let post of posts">
-    <img class="card-img-top" src="https://picsum.photos/700/400?random={{post.id}}" height="400px" alt="Imagem de capa do card">    
-    <div class="card-body">
-      <h3 class="card-title mb-0">{{post.title}}</h3>
-      <p> Por {{ post.author }}</p>
-      <p class="card-text"> {{ post.body }} </p>
-      <a routerLink = "/post">Ver mais >></a> <br><br>
-
-      <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-calendario.png"> {{post.datePost | date: 'dd/MM/yyyy HH:mm:ss'}}</small></p>
-      <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-comentario.png"> {{post.nComments}}</small></p>
-              
+  <div class="card mx-auto mb-3 mt-4 shadow-lg" *ngFor="let post of posts | paginate: { itemsPerPage: 3, currentPage: paginaAtual}">
+        <img class="card-img-top" src="https://picsum.photos/700/400?random={{post.id}}" height="400px" alt="Imagem de capa do card">    
+        <div class="card-body">
+          <h3 class="card-title mb-0">{{post.title}}</h3>
+          <p> Por {{ post.author }}</p>
+          <p class="card-text"> {{ post.body }} </p>
+          <a routerLink = "/post">Ver mais >></a> <br><br>
+    
+          <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-calendario.png"> {{post.datePost | date: 'dd/MM/yyyy HH:mm:ss'}}</small></p>
+          <p class="card-text d-inline mr-3"><small class="text-muted"><img src="../../assets/icon-comentario.png"> {{post.nComments}}</small></p>
+                  
+        </div>
+    </div>
+<div class="card mx-auto mb-3 mt-4 shadow-lg">
+    <div class="mx-auto justify-content-center paginacao">
+        <pagination-controls (pageChange)="paginaAtual = $event  " responsive="true"></pagination-controls>
     </div>
 </div>
+    
+    
+
