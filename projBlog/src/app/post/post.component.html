@@ -1,6 +1,52 @@
 <div class="container mt-4 shadow-lg p-4" style="background: #FFFFFF; border-radius: 1em">
     <span><h3>{{post.title}}</h3></span>
-    <span class="be-comment-actions">[ <a href="">Editar</a> | <a href="">Excluir</a> ]</span>
+    
+    <span class="be-comment-actions">[ <a data-toggle="modal" data-target="#editarModal" href="">Editar</a> | <a href="">Excluir</a> ]</span>
+    
+      
+      <!-- Modal -->
+    <div class="modal fade" id="editarModal" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form class="form" [formGroup]="formularioEditar" (ngSubmit)="editarPost()" novalidate>
+                        <div class="form-group ">
+                            <label>Nome do autor </label>
+                            <input type="text" class="form-control inputs shadow-sm" formControlName="autor" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Título da publicação </label>
+                            <input type="text" class="form-control inputs shadow-sm" formControlName="titulo" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Texto da publicação </label>
+                            <textarea class="form-control inputs shadow-sm" formControlName="corpo" rows="3" placeholder=""></textarea>
+                        </div>
+
+                            
+                        <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                            <button class="btn btn-primary" type="submit"  value="Submit">ENVIAR</button>
+                        </div>
+
+                            <div>
+                                
+                        </div>
+                            
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
     <p>Por {{post.author}}</p>
     <hr>
     <p>Postado em {{post.datePost | date: 'dd/MM/yyyy HH:mm'}}</p>
@@ -13,11 +59,11 @@
     </div>
     
     <hr>
-    <div *ngIf="comments.length === 0">
+    <div *ngIf="!comments">
         <p>Ainda não há comentários neste post</p>
     </div>
 
-    <div *ngIf="comments.length !== 0" >
+    <div *ngIf="comments" >
         <h1 class="comments-title">Comentários ({{ comments.length }})</h1>
         <div *ngFor="let comment of comments"> 
             <div class="be-comment">

@@ -8,7 +8,7 @@ exports.list_all_post = function(req, res) {
     console.log('controller')
     if (err)
       res.send(err);
-      console.log('res', post);
+      // console.log('res', post);
     res.send(post);
   });
 };

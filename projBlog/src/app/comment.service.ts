@@ -22,7 +22,7 @@ export class CommentService{
     public getComments (): Observable<Comment[]> {
         return this.http.get<Comment[]>(apiUrl)
           .pipe(
-            tap(comment => console.log('leu os comentarios')),
+            tap(),
             catchError(this.handleError('getComment', []))
           );
     }
@@ -30,14 +30,14 @@ export class CommentService{
     public getComment(id: number): Observable<Comment> {
         const url = `${apiUrl}/${id}`;
         return this.http.get<Comment>(url).pipe(
-          tap(_ => console.log(`leu o comentario id=${id}`)),
+          tap(),
           catchError(this.handleError<Comment>(`getComment id=${id}`))
         );
     }
 
     public addComment (comentario): Observable<Comment> {
         return this.http.post<Comment>(apiUrl, comentario, httpOptions).pipe(
-          tap((comentario: Comment) => console.log(`adicionou o comentario`)),
+          tap(),
           catchError(this.handleError<Comment>('addComment'))
         );
     }
@@ -45,7 +45,7 @@ export class CommentService{
     public updateComment(id, comment): Observable<any> {
         const url = `${apiUrl}/${id}`;
         return this.http.put(url, comment, httpOptions).pipe(
-          tap(_ => console.log(`atualiza o comentario com id=${id}`)),
+          tap(),
           catchError(this.handleError<any>('updateComment'))
         );
     }
@@ -53,7 +53,7 @@ export class CommentService{
     public deleteComment (id): Observable<Comment> {
         const url = `${apiUrl}/delete/${id}`;
         return this.http.delete<Comment>(url, httpOptions).pipe(
-          tap(_ => console.log(`remove o comment com id=${id}`)),
+          tap(),
           catchError(this.handleError<Comment>('deleteComment'))
         );
     }

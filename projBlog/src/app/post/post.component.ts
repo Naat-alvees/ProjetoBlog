@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
 import { Comment } from '../models/comment.model';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { CommentService } from '../comment.service';
 
 @Component({
@@ -14,32 +14,54 @@ import { CommentService } from '../comment.service';
 export class PostComponent implements OnInit {
 
   public id_post : number;
-  public post : Post;
+  public post : Post = new Post();
   public comments: Comment[];
-  public icon_aleatorio: number = 5;
+  public formularioEditar: FormGroup = new FormGroup({
+    'autor': new FormControl(null),
+    'titulo': new FormControl(null),
+    'corpo': new FormControl(null)
+  });; 
 
   constructor(private route: ActivatedRoute, private postService : PostService, private commentService: CommentService) { }
 
   ngOnInit() {
     this.id_post = this.route.snapshot.params['id'];
-    
 
     // Le o post
     this.postService.getPost(this.id_post).subscribe(res => {
       this.post = res[0];
-      console.log(this.post);
-    }, err => {
+      this.formularioEditar.patchValue({
+        autor: this.post.author,
+        titulo: this.post.title,
+        corpo: this.post.body,
+      });
+      console.log(this.post)
+      }, err => {
       console.log(err);
     });
 
+
     //Le os comentarios do post
     this.commentService.getComments().subscribe(res => {
-      console.log(res);
       this.comments = res;
     }, err => {
       console.log(err);
     });
+  }
 
+  public editarPost(): void{
+    // let post: Post = this.post
+    let post: Post = new Post();
+    post.author = this.formularioEditar.value.autor;
+    post.body = this.formularioEditar.value.corpo;
+    post.title = this.formularioEditar.value.titulo;
+    // this.post = post;
+    console.log(post)
+    this.postService.updatePost(this.id_post, post).subscribe( res => {
+      this.ngOnInit
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   public addComentario(formulario: NgForm): void {

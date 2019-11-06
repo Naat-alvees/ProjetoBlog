@@ -15,7 +15,7 @@ Post.createPost = function (newPost, result) {
                     result(err, null);
                 }
                 else{
-                    console.log(res.insertId);
+                    // console.log(res.insertId);
                     result(null, res.insertId);
                 }
             });           
@@ -40,7 +40,7 @@ Post.getAllPost = function (result) {
                     result(null, err);
                 }
                 else{
-                  console.log('post : ', res);  
+                //   console.log('post : ', res);  
 
                  result(null, res);
                 }

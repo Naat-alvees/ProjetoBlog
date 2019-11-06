@@ -24,7 +24,7 @@ export class PostService{
     public getPosts (): Observable<Post[]> {
         return this.http.get<Post[]>(apiUrl)
           .pipe(
-            tap(post => console.log('leu os posts')),
+            tap(),
             catchError(this.handleError('getPosts', []))
           );
     }
@@ -32,14 +32,14 @@ export class PostService{
     public getPost(id: number): Observable<Post> {
         const url = `${apiUrl}/${id}`;
         return this.http.get<Post>(url).pipe(
-          tap(_ => console.log(`leu o post id=${id}`)),
+          tap(),
           catchError(this.handleError<Post>(`getPost id=${id}`))
         );
     }
 
     public addPost (post): Observable<Post> {
         return this.http.post<Post>(apiUrl, post, httpOptions).pipe(
-          tap((post: Post) => console.log(`adicionou o post com w/ id=${post.id}`)),
+          tap(),
           catchError(this.handleError<Post>('addPost'))
         );
     }
@@ -47,7 +47,7 @@ export class PostService{
     public updatePost(id, post): Observable<any> {
         const url = `${apiUrl}/${id}`;
         return this.http.put(url, post, httpOptions).pipe(
-          tap(_ => console.log(`atualiza o post com id=${id}`)),
+          tap(),
           catchError(this.handleError<any>('updatePost'))
         );
     }
@@ -55,7 +55,7 @@ export class PostService{
     public deletePost (id): Observable<Post> {
         const url = `${apiUrl}/delete/${id}`;
         return this.http.delete<Post>(url, httpOptions).pipe(
-          tap(_ => console.log(`remove o post com id=${id}`)),
+          tap(),
           catchError(this.handleError<Post>('deletePost'))
         );
     }

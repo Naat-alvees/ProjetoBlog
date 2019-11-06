@@ -8,7 +8,7 @@ exports.list_all_comment = function(req, res) {
     console.log('controller')
     if (err)
       res.send(err);
-      console.log('res', comment);
+      // console.log('res', comment);
     res.send(comment);
   });
 };

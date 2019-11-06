@@ -13,6 +13,7 @@ import { ContatoComponent } from './contato/contato.component';
 import { PostComponent } from './post/post.component';
 import { PostService } from './post.service';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ReactiveFormsModule
   ],
   providers: [PostService],
   bootstrap: [AppComponent]

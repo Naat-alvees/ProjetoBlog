@@ -42,7 +42,7 @@ Comment.getAllComment = function (result) {
                     result(null, err);
                 }
                 else{
-                  console.log('comment : ', res);  
+                //   console.log('comment : ', res);  
 
                  result(null, res);
                 }
