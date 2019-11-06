@@ -47,7 +47,7 @@ Post.getAllPost = function (result) {
             });   
 };
 Post.updateById = function(id, post, result){
-  sql.query("UPDATE post SET title = ?, body = ?, author = ?, date = ? WHERE id = ?", [post.title, post.body,post.author, post.date, id], function (err, res) {
+  sql.query("UPDATE post SET title = ?, body = ?, author = ? WHERE id = ?", [post.title, post.body,post.author, id], function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);

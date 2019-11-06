@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
@@ -12,7 +12,7 @@ import { CommentService } from '../comment.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-
+  
   public id_post : number;
   public post : Post = new Post();
   public comments: Comment[];
@@ -25,6 +25,7 @@ export class PostComponent implements OnInit {
   constructor(private route: ActivatedRoute, private postService : PostService, private commentService: CommentService) { }
 
   ngOnInit() {
+
     this.id_post = this.route.snapshot.params['id'];
 
     // Le o post
@@ -58,7 +59,7 @@ export class PostComponent implements OnInit {
     // this.post = post;
     console.log(post)
     this.postService.updatePost(this.id_post, post).subscribe( res => {
-      this.ngOnInit
+      this.ngOnInit();
     }, (err) => {
       console.log(err);
     });
