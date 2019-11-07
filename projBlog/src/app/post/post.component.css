@@ -1,7 +1,15 @@
-span {
+.formatSpan {
     display: inline-block;
     width: 50%;
-    
+}
+
+.formLink{
+    color: blue;
+    cursor:pointer;
+}
+
+.formLink:hover{
+    text-decoration: underline;
 }
 
 .comments-title {
@@ -53,32 +61,3 @@ span {
     border: 1px solid #edeff2;
     padding: 15px 20px 20px 20px;
 }
-
-/* .card{
-    border-radius: 0.7rem;
-}
-.card-header{
-    background: #fd79a8;
-    border-top-left-radius: 0.7rem;
-    border-top-right-radius: 0.7rem;
-    color: white;
-    font-size: 5mm;
-}
-
-.inputs{
-    border-radius: 0.8rem;
-}
-.btn{
-    margin-top: 10px;
-    background-color: #fd79a8;
-    border-radius: 2rem;
-    letter-spacing: 0.05rem;
-    font-size: 0.9rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
-}
-
-button:hover{
-
-    background-color: #ff9ff3;
-} */

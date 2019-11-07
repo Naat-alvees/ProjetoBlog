@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
 import { Comment } from '../models/comment.model';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentService } from '../comment.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-post',
@@ -12,17 +13,18 @@ import { CommentService } from '../comment.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+  public modaleditar: BsModalRef;
   
   public id_post : number;
   public post : Post = new Post();
   public comments: Comment[];
   public formularioEditar: FormGroup = new FormGroup({
-    'autor': new FormControl(null),
+    'autor': new FormControl(null, [Validators.required]),
     'titulo': new FormControl(null),
     'corpo': new FormControl(null)
   });; 
 
-  constructor(private route: ActivatedRoute, private postService : PostService, private commentService: CommentService) { }
+  constructor(private route: ActivatedRoute, private postService : PostService, private commentService: CommentService, private modalService: BsModalService) { }
 
   ngOnInit() {
 
@@ -50,6 +52,10 @@ export class PostComponent implements OnInit {
     });
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modaleditar = this.modalService.show(template);
+  }
+
   public editarPost(): void{
     // let post: Post = this.post
     let post: Post = new Post();
@@ -60,6 +66,7 @@ export class PostComponent implements OnInit {
     console.log(post)
     this.postService.updatePost(this.id_post, post).subscribe( res => {
       this.ngOnInit();
+      this.modaleditar.hide()
     }, (err) => {
       console.log(err);
     });
@@ -76,6 +83,10 @@ export class PostComponent implements OnInit {
     });
      
   }
+
+  public botaoClicado() {
+    alert('Botão clicado!');
+ }
 
   public getNumeroaleatorio(){
     let min = 1;
