@@ -53,7 +53,7 @@ export class PostService{
     }
 
     public deletePost (id): Observable<Post> {
-        const url = `${apiUrl}/delete/${id}`;
+        const url = `${apiUrl}/${id}`;
         return this.http.delete<Post>(url, httpOptions).pipe(
           tap(),
           catchError(this.handleError<Post>('deletePost'))

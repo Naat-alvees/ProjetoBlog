@@ -52,6 +52,7 @@ exports.update_a_post = function(req, res) {
 
 
 exports.delete_a_post = function(req, res) {
+  console.log("entrou")
   Post.remove( req.params.postId, function(err, post) {
     if (err)
       res.send(err);

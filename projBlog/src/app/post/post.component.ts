@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
 import { Comment } from '../models/comment.model';
@@ -14,20 +14,26 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class PostComponent implements OnInit {
   public modaleditar: BsModalRef;
+  public modalExcluir: BsModalRef;
   
   public id_post : number;
   public post : Post = new Post();
   public comments: Comment[];
   public formularioEditar: FormGroup = new FormGroup({
     'autor': new FormControl(null, [Validators.required]),
-    'titulo': new FormControl(null),
-    'corpo': new FormControl(null)
+    'titulo': new FormControl(null, [Validators.required]),
+    'corpo': new FormControl(null, [Validators.required])
   });; 
 
-  constructor(private route: ActivatedRoute, private postService : PostService, private commentService: CommentService, private modalService: BsModalService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private postService : PostService, 
+    private commentService: CommentService, 
+    private modalService: BsModalService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-
     this.id_post = this.route.snapshot.params['id'];
 
     // Le o post
@@ -38,7 +44,6 @@ export class PostComponent implements OnInit {
         titulo: this.post.title,
         corpo: this.post.body,
       });
-      console.log(this.post)
       }, err => {
       console.log(err);
     });
@@ -52,29 +57,38 @@ export class PostComponent implements OnInit {
     });
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modaleditar = this.modalService.show(template);
+  openModalEditar(template: TemplateRef<any>) {
+    this.modaleditar = this.modalService.show(template, {class: 'modal-dialog-centered'});
   }
 
-  public editarPost(): void{
-    // let post: Post = this.post
+  openModalExcluir(template: TemplateRef<any>) {
+    this.modalExcluir = this.modalService.show(template, {class: 'modal-dialog-centered'});
+  }
+
+  editarPost(): void{
     let post: Post = new Post();
     post.author = this.formularioEditar.value.autor;
     post.body = this.formularioEditar.value.corpo;
     post.title = this.formularioEditar.value.titulo;
-    // this.post = post;
-    console.log(post)
     this.postService.updatePost(this.id_post, post).subscribe( res => {
-      this.ngOnInit();
-      this.modaleditar.hide()
+        this.ngOnInit();
+        this.modaleditar.hide()
     }, (err) => {
       console.log(err);
     });
   }
 
-  public addComentario(formulario: NgForm): void {
+  excluirPost():void{
+    this.postService.deletePost(this.id_post).subscribe( res => {
+      this.modalExcluir.hide();
+      this.router.navigate(['']);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  addComentario(formulario: NgForm): void {
     let comentario: Comment = new Comment(this.id_post, formulario.value.title,formulario.value.body, formulario.value.email, formulario.value.author);
-    console.log(comentario)
     this.commentService.addComment(comentario).subscribe( res => {
       formulario.reset();
       this.ngOnInit();
@@ -84,11 +98,7 @@ export class PostComponent implements OnInit {
      
   }
 
-  public botaoClicado() {
-    alert('Botão clicado!');
- }
-
-  public getNumeroaleatorio(){
+  getNumeroaleatorio(){
     let min = 1;
     let max = 6;
     min = Math.ceil(min);

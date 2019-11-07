@@ -1,7 +1,7 @@
 <div class="container mt-4 shadow-lg p-4" style="background: #FFFFFF; border-radius: 1em">
     <span class="formatSpan"><h3>{{post.title}}</h3></span>
     
-    <span class="be-comment-actions formatSpan">[ <span class="formLink" (click)="openModal(template)">Editar</span> | <span class="formLink" (click)="botaoClicado()" >Excluir</span> ]</span>
+    <span class="be-comment-actions formatSpan">[ <span class="formLink" (click)="openModalEditar(template)">Editar</span> | <span class="formLink" (click)="openModalExcluir(template1)" >Excluir</span> ]</span>
     
       
       <!-- Modal Editar-->
@@ -39,6 +39,28 @@
                         
                 </form>
             </div>
+        </div>
+    </ng-template>
+
+
+    <!-- Modal excluir -->
+    <ng-template #template1>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Excluir Post</h5>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalExcluir.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button> 
+            </div>
+
+            <div class="modal-body">
+                <p>Você tem certeza que deseja excluir o post?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modalExcluir.hide()">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="excluirPost()">Excluir</button>
+              </div>
         </div>
     </ng-template>
     
