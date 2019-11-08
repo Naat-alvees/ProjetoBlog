@@ -49,7 +49,7 @@ Comment.getAllComment = function (result) {
             });   
 };
 Comment.updateById = function(id, comment, result){
-  sql.query("UPDATE comment SET body = ? WHERE id = ?", [ comment.body, id], function (err, res) {
+  sql.query("UPDATE comment SET body = ?, title = ? WHERE id = ?", [ comment.body,comment.title, id], function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);

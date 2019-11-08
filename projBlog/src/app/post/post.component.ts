@@ -19,11 +19,19 @@ export class PostComponent implements OnInit {
   public id_post : number;
   public post : Post = new Post();
   public comments: Comment[];
+  
   public formularioEditar: FormGroup = new FormGroup({
     'autor': new FormControl(null, [Validators.required]),
     'titulo': new FormControl(null, [Validators.required]),
     'corpo': new FormControl(null, [Validators.required])
-  });; 
+  });
+  
+  public formularioEditarComentario: FormGroup = new FormGroup({
+    'tituloComentario': new FormControl(null, [Validators.required]),
+    'textoComentario': new FormControl(null, [Validators.required])
+  });
+
+  public crtEditar: boolean = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -42,7 +50,7 @@ export class PostComponent implements OnInit {
       this.formularioEditar.patchValue({
         autor: this.post.author,
         titulo: this.post.title,
-        corpo: this.post.body,
+        corpo: this.post.body
       });
       }, err => {
       console.log(err);
@@ -88,14 +96,44 @@ export class PostComponent implements OnInit {
   }
 
   addComentario(formulario: NgForm): void {
-    let comentario: Comment = new Comment(this.id_post, formulario.value.title,formulario.value.body, formulario.value.email, formulario.value.author);
+    let comentario: Comment = new Comment();
+    comentario.post_id = this.id_post;
+    comentario.title = formulario.value.title;
+    comentario.body = formulario.value.body;
+    comentario.email = formulario.value.email; 
+    comentario.author = formulario.value.author;
     this.commentService.addComment(comentario).subscribe( res => {
       formulario.reset();
       this.ngOnInit();
     }, (err) => {
       console.log(err);
     });
-     
+  }
+
+  clickEditarComentario(comentarioAtual: Comment): void{
+    this.crtEditar = true;
+    this.formularioEditarComentario.patchValue({
+      tituloComentario: comentarioAtual.title,
+      textoComentario: comentarioAtual.body
+    });
+  }
+
+  editarComentario(id_comentario: number): void{
+    let comentario: Comment = new Comment();
+    comentario.title = this.formularioEditarComentario.value.tituloComentario;
+    comentario.body = this.formularioEditarComentario.value.textoComentario;
+    console.log(comentario);
+    this.commentService.updateComment(id_comentario,comentario).subscribe( res => {
+      this.crtEditar = false;
+      this.ngOnInit();
+      console.log("comentario editado")
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  voceClicou(){
+    console.log("clicou")
   }
 
   getNumeroaleatorio(){

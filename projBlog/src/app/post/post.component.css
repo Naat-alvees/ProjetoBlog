@@ -3,6 +3,14 @@
     width: 50%;
 }
 
+.ponteiro{
+    cursor:pointer;
+}
+
+.diminui{
+    width: 80%;
+}
+
 .formLink{
     color: blue;
     cursor:pointer;

@@ -95,18 +95,40 @@
                                 <b>{{comment.author}}</b> comentou:
                             </span>
                             <span class="formatSpan be-comment-actions ">
-                                <img src="../../assets/icon-editar.png">
-                                <img src="../../assets/icon-excluir.png">
+                                <img class="ponteiro" src="../../assets/icon-editar.png" (click)="clickEditarComentario(comment)">
+                                <img class="ponteiro" src="../../assets/icon-excluir.png" (click)="voceClicou()">
 
                             </span>
-                        <p class="be-comment-text">
-                            <b>{{ comment.title }}</b>
-                            <br><br>
-                            {{ comment.body }}
-                        </p>
+
+                            <!-- Edição do comentario -->
+                            <div *ngIf="crtEditar">
+                                <form [formGroup]="formularioEditarComentario" (ngSubmit)="editarComentario(comment.id)" novalidate>
+                                    <div class="form-group ">
+                                            <input type="text" class="form-control shadow-sm diminui" formControlName="tituloComentario" placeholder="Título do comentário"> 
+                                    </div>
+                                    <div class="form-group ">
+                                            <textarea rows="1" class="form-control shadow-sm diminui"  formControlName="textoComentario"  placeholder="Texto do comentário"></textarea>    
+                                    </div>
+                                    <button class="btn btn-primary" [disabled] = "formularioEditarComentario.invalid" type="submit" value="Submit">SALVAR</button>
+
+                                </form>
+                            </div>
+
+                            <!-- Mostra o comentario  -->
+                            <div *ngIf="!crtEditar">
+                                <p class="be-comment-text">
+                                    <b>{{ comment.title }}</b>
+                                    <br><br>
+                                    {{ comment.body }}
+                                </p>
+                            </div>
+                        
                     </div>
             </div>
     </div>
+
+
+    
  
         
     </div><!-- Div final -->
