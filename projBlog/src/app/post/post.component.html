@@ -96,9 +96,30 @@
                             </span>
                             <span class="formatSpan be-comment-actions ">
                                 <img class="ponteiro" src="../../assets/icon-editar.png" (click)="clickEditarComentario(comment)">
-                                <img class="ponteiro" src="../../assets/icon-excluir.png" (click)="voceClicou()">
+                                <img class="ponteiro" src="../../assets/icon-excluir.png" (click)="openModalExcluirComentario(templateComentario)">
 
                             </span>
+
+                            <!-- Modal exclui comentario -->
+                            <ng-template #templateComentario>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" >Excluir comentário</h5>
+                                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalExcluirComentario.hide()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button> 
+                                    </div>
+                        
+                                    <div class="modal-body">
+                                        <p>Você tem certeza que deseja excluir o comentário?</p>
+                                    </div>
+                        
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" (click)="modalExcluirComentario.hide()">Cancelar</button>
+                                        <button type="button" class="btn btn-danger" (click)="excluirComentario(comment.id)">Excluir</button>
+                                        </div>
+                                </div>
+                            </ng-template>
 
                             <!-- Edição do comentario -->
                             <div *ngIf="crtEditar">

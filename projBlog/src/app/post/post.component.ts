@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../post.service';
 import { Post } from '../models/post.modal';
@@ -15,6 +15,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class PostComponent implements OnInit {
   public modaleditar: BsModalRef;
   public modalExcluir: BsModalRef;
+  public modalExcluirComentario: BsModalRef;
   
   public id_post : number;
   public post : Post = new Post();
@@ -73,6 +74,10 @@ export class PostComponent implements OnInit {
     this.modalExcluir = this.modalService.show(template, {class: 'modal-dialog-centered'});
   }
 
+  openModalExcluirComentario(template: TemplateRef<any>) {
+    this.modalExcluirComentario = this.modalService.show(template, {class: 'modal-dialog-centered'});
+  }
+
   editarPost(): void{
     let post: Post = new Post();
     post.author = this.formularioEditar.value.autor;
@@ -126,14 +131,19 @@ export class PostComponent implements OnInit {
     this.commentService.updateComment(id_comentario,comentario).subscribe( res => {
       this.crtEditar = false;
       this.ngOnInit();
-      console.log("comentario editado")
     }, (err) => {
       console.log(err);
     });
   }
 
-  voceClicou(){
-    console.log("clicou")
+  excluirComentario(id_comentario: number):void{
+    console.log(id_comentario)
+    this.commentService.deleteComment(id_comentario).subscribe( res => {
+      this.modalExcluirComentario.hide();
+      this.ngOnInit();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   getNumeroaleatorio(){
@@ -143,6 +153,4 @@ export class PostComponent implements OnInit {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
-
 }

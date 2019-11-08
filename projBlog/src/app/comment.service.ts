@@ -51,7 +51,7 @@ export class CommentService{
     }
 
     public deleteComment (id): Observable<Comment> {
-        const url = `${apiUrl}/delete/${id}`;
+        const url = `${apiUrl}/${id}`;
         return this.http.delete<Comment>(url, httpOptions).pipe(
           tap(),
           catchError(this.handleError<Comment>('deleteComment'))
